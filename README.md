@@ -15,3 +15,4 @@ Normal way:
 
 Docker way:
 1. In terminal run `docker run -p 8000:8000 ndrnmnk/django-shop`
+2. Go in your browser to `localhost:8000`
