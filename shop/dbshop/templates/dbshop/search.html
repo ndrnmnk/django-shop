@@ -1,0 +1,20 @@
+{% extends 'main/layout.html' %}
+{% load exchange %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+    <b>Search</b><br>
+    {% if good %}
+        {% for el in good %}
+            <div class="alert alert-warning">
+                <h3>{{ el.title}}</h3>
+                <img src="{{ el.pic.url }}" height=260><br>
+                <h3>{{el.price}} USD</h3>
+                <a href="{% url 'goods-detail' el.id %}" class="btn btn-warning">Read more</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <b>Nothing here yet</b>
+    {% endif %}
+{% endblock %}

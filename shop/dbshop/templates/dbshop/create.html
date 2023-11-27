@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+{% load updated %}
+
+{% block title %}Create advertisement{% endblock %}
+
+{% block content %}
+    <b>Create advertisement</b>
+    <form method="post" enctype="multipart/form-data">
+        {% if error != '' %}
+            <div class="alert alert-danger">
+                <span>{{ error }}</span>
+            </div><br>
+        {% endif %}
+        {% csrf_token %}
+        {{ form.title }}<br>
+        {{ form.price }}<br>
+        <div class="picSelector">{{ form.pic }}</div>
+        <br>
+        {{ form.description }}<br>
+        <input type="hidden" name="author" id="id_author" value='{{ form.author }}'>
+        <input type="hidden" name="updated" id="id_updated" value='{{ form.updated }}'>
+        {% if user.is_authenticated %}
+            <button class="btn btn-success" onclick="setUpdatedDate()" type="submit">Publish advertisement</button>
+        {% else %}
+            <h3>You can not sell until You <a href="{% url 'login' %}">log in</a></h3>
+        {% endif %}
+    </form>
+
+    <script>
+        function setUpdatedDate() {
+            document.getElementById('id_updated').value = '{% updated %}';
+            document.getElementById('id_author').value = '{{ user.username }}';
+        }
+    </script>
+{% endblock %}

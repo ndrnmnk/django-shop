@@ -1,0 +1,35 @@
+{% extends 'main/layout.html' %}
+{% load exchange %}
+
+
+{% block title %}{{ good.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ good.title }}</h1>
+    <img src="{{ good.pic.url }}" width=500><br>
+    <div id="exchanger">
+        <div id="moneyAmount" data-good-price="{{ good.price|default:0 }}"></div>
+        <select class="form-control" id = 'currency' onchange="performExchange()">
+            <option value="UAH" {% if user.default_currency == 'UAH' %}selected{% endif %} >UAH</option>
+            <option value="PLN" {% if user.default_currency == 'PLN' %}selected{% endif %} >PLN</option>
+            <option value="USD" {% if user.default_currency == 'USD' %}selected{% endif %} >USD</option>
+            <option value="EUR" {% if user.default_currency == 'EUR' %}selected{% endif %} >EUR</option>
+        </select>
+
+        <h3 id="result"></h3>
+        <script src="/static/js/exchanger.js" defer></script>
+
+    </div>
+    <h2>{{ good.description }}</h2>
+    <h3>Last updated at {{ good.updated }}</h3>
+    <h3>Published at {{ good.created }} by {{ good.author }}</h3>
+    {% if user.is_authenticated and user.username == good.author %}
+        <a href = "{% url 'goods-update' good.id %}" class="btn btn-warning">Edit</a>
+        <a href = "{% url 'goods-delete' good.id %}" class="btn btn-warning">Delete</a>
+    {% elif user.is_authenticated and user.username != good.author %}
+        <a href = "{% url 'error' %}" class="btn btn-warning">Buy</a>
+    {% else %}
+        <h3>You can not buy anything unless You <a href="{% url 'login' %}">log in</a></h3>
+    {% endif %}
+    {{ user.default_currency }}
+{% endblock %}
