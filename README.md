@@ -10,7 +10,7 @@ Normal way:
 2. Change directory: `cd django-shop/`
 3. Install requirements: `pip install -r requirements.txt`
 4. Run server:
-`python3 manage.py shop/runserver`
+`python3 shop/manage.py runserver`
 5. Go in your browser to `localhost:8000`
 
 Docker way:
