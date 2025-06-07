@@ -1,10 +1,11 @@
 # django-shop
-Web shop i coded on django as part of IPPT projects. Do not use on production
-It's currently in beta, so there can be bugs and missing features. Maybe i'll fix/add them later
+Web shop i coded on Django as part of IPPT projects.
+
+There are bugs and missing features. Not recomended to use.
 
 **There are 2 ways to run this:**
 
-Normal way:
+Python way:
 1. Clone this repo: 
 `git clone https://github.com/ndrnmnk/django-shop/tree/master`
 2. Change directory: `cd django-shop/`
